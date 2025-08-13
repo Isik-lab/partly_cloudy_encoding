@@ -118,7 +118,27 @@ def load_clean_data(subject_range, directory):
 
     return clean_data
 
+def trim_blank_trs(bold_data):
+    """
+        Trims fMRI data from beginning and end of movie that should not be used.
+        TRs 0-10 are blank, and TRs after 162 are credits, so these are considered the blank TRs.
+        To account for hemodynamic lag, these blank TRs are offset by 2 TRs (4 seconds). 
+        This yields a trimmed data set of TRs 12 - 164
+        Returns an array of bold data with relevant slices removed
+        
+    """
+    trimmed_data = []
 
+    for data in bold_data: 
+        # Remove TRs after 164
+        end_trimmed = np.delete(data, slice(164,168), 1)
+        
+        # Remove TRS 0-12
+        front_trimmed = np.delete(end_trimmed, slice(0,12), 1)
+        
+        trimmed_data.append(front_trimmed)
+        
+    return trimmed_data
 
 
 ##### ISC mask generation
