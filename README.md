@@ -1,7 +1,5 @@
 # Python and Bash code used for Analaysis
 
-Update 8/13/2025: In our paper we note that "the movie was segmented into 2 second clips corresponding to TR length, resulting in 168 segments total. The opening (Segments 0–10) and closing (Segments 162–168) credits were trimmed from the labeling set." This trimming refers to the corresponding TRs from the fMRI data, not the pixar movie clips. This trimming was to account for a period of rest before the movie began in the scanner, in addition to the first few seconds of the movie itself. In the original paper Richardson et al (2018)'s fMRI data collection procedure, 10 seconds (5 TRs) of rest was added to the fMRI scan before presenting the movie stimulus, which is why we have TRs 0-10 trimmed from the fMRI data, but only 0-5 trimmed from the movie clips. (For more information on how we trim the movie data please look at “trim_blank_tr” function in the "data_prep_helpers.py" file)
-
 
 Summary: Raw code for banded ridge regression analysis of Partly Cloudy fMRI data
 
@@ -9,6 +7,11 @@ Hi! This is the code that was used in our paper, "Early neural development of so
 
 To run this code, you will need to get the video stimulus from Richardson et al (2018) and fMRI data from Hillary Richardson's open fMRI page, download tikreg and PyMoten packages from Gallant Lab Github (https://github.com/gallantlab).
 To run ROI analyses, you would also need to download the ROI masks we used: We used STS mask from Ben Deen's group (https://bendeen.com/data/) and MT from Sabine Kastner's group (https://napl.scholar.princeton.edu/resources)
+
+Note on movie and fMRI segmentation:
+The movie was segmented into 2s segments (corresponding to TRs) and trimmed to remove the opening (segments 0-4) and closing credits (segments 157-174).
+The fMRI data was also trimmed to remove the opening (TRs 0–10) and closing (TRs 162–168), as well as periods of rest before and after the film. 
+For more information on how we trim the movie data please look at “trim_blank_tr” function in the "data_prep_helpers.py" file. 
 
 # How to use the code
 Broadly, there's three types of files: 
